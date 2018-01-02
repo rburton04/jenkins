@@ -40,6 +40,3 @@ RUN chown -R 1001:0 $HOME && \
 
 USER 1001
 
-# Run the JNLP client by default
-# To use swarm client, specify "/var/lib/jenkins/run-swarm-client" as Command
-ENTRYPOINT ["/var/lib/jenkins/run-jnlp-client"]
