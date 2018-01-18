@@ -39,3 +39,9 @@ RUN chown -R 1001:0 $HOME && \
 
 USER 1001
 
+# Copy the entrypoint
+ADD contrib/bin/* /usr/local/bin/
+
+# Run the Jenkins JNLP client
+ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
+
