@@ -26,6 +26,9 @@ RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     yum clean all -y && \
     wget http://mirror.olnevhost.net/pub/apache/maven/binaries/apache-maven-3.2.1-bin.tar.gz && \
     tar xvf apache-maven-3.2.1-bin.tar.gz && \
+    export M2_HOME=/usr/local/bin/scl_enable/apache-maven-3.2.1 && \
+    export M2=$M2_HOME/bin && \
+    export PATH=$M2:$PATH && \
     mkdir -p $HOME/.m2 && \
     chmod -R 777 /usr/local/bin && \
     curl -SsL https://downloads.getgauge.io/stable | sh && \
