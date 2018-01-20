@@ -30,7 +30,8 @@ RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     export M2_HOME=/usr/local/apache-maven/apache-maven-3.2.1 && \
     export M2=$M2_HOME/bin && \
     export PATH=$M2:$PATH && \
-    curl -SsL https://downloads.getgauge.io/stable | sh -s -- --location=/usr/bin && \
+    chmod -R 777 /usr/local/bin && \
+    curl -SsL https://downloads.getgauge.io/stable | sh && \
     gauge install java
 
 # When bash is started non-interactively, to run a shell script, for example it
