@@ -24,12 +24,9 @@ RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     yum install -y $INSTALL_PKGS && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
-    mkdir -p $HOME/.m2 && \
     wget http://mirror.olnevhost.net/pub/apache/maven/binaries/apache-maven-3.2.1-bin.tar.gz && \
     tar xvf apache-maven-3.2.1-bin.tar.gz && \
-    export M2_HOME=/usr/local/apache-maven/apache-maven-3.2.1 && \
-    export M2=$M2_HOME/bin && \
-    export PATH=$M2:$PATH && \
+    mkdir -p $HOME/.m2 && \
     chmod -R 777 /usr/local/bin && \
     curl -SsL https://downloads.getgauge.io/stable | sh && \
     gauge install java
