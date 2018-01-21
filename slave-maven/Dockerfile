@@ -18,19 +18,24 @@ ENV MAVEN_VERSION=3.3 \
     PROMPT_COMMAND=". /usr/local/bin/scl_enable"
 
 # Install Maven
-RUN INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686 rh-maven33*" && \
-    yum install -y centos-release-scl-rh && \
-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
-    curl -LOk https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip && \
-    unzip gradle-${GRADLE_VERSION}-bin.zip -d /opt && \
-    rm -f gradle-${GRADLE_VERSION}-bin.zip && \
-    ln -s /opt/gradle-${GRADLE_VERSION} /opt/gradle && \
+RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    yum-config-manager --enable jboss-rhel-rhscl && \
+    scl enable rh-maven33 && \
+    yum-config-manager --disable epel >/dev/null || : && \
+    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686 rh-maven33*" && \
+    yum install -y $INSTALL_PKGS && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
+  #  wget http://mirror.olnevhost.net/pub/apache/maven/binaries/apache-maven-3.2.1-bin.tar.gz && \
+  #  tar xvf apache-maven-3.2.1-bin.tar.gz && \
+  #  export M2_HOME=/usr/local/bin/scl_enable/apache-maven-3.2.1 && \
+  #  export M2=$M2_HOME/bin && \
+  #  export PATH=$M2:$PATH && \
     mkdir -p $HOME/.m2 && \
-    mkdir -p $HOME/.gradle && \
-    curl -SsL https://downloads.getgauge.io/stable | sh -s -- --location=/usr/bin && \
+    chmod -R 777 /usr/local/bin && \
+    curl -SsL https://downloads.getgauge.io/stable | sh && \
     gauge install java
+
 
 # When bash is started non-interactively, to run a shell script, for example it
 # looks for this variable and source the content of this file. This will enable
