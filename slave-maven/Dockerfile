@@ -19,7 +19,8 @@ ENV MAVEN_VERSION=3.3 \
 
 # Install Maven
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
-    yum-config-manager --jboss-rhel-rhscl && \
+    yum-config-manager --enable jboss-rhel-rhscl && \
+    scl enable rh-maven33 && \
     yum-config-manager --disable epel >/dev/null || : && \
     INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686 rh-maven33*" && \
     yum install -y $INSTALL_PKGS && \
