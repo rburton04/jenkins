@@ -25,7 +25,7 @@ RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
     cd /usr/local/bin && \
-    wget http://mirror.olnevhost.net/pub/apache/maven/binaries/apache-maven-3.3.9-bin.tar.gz && \
+    wget https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.3.9/apache-maven-3.3.9-bin.tar.gz && \
     tar xvf apache-maven-3.3.9-bin.tar.gz && \
     export M2_HOME=/usr/local/bin/apache-maven/apache-maven-3.3 && \
     export M2=$M2_HOME/bin && \
