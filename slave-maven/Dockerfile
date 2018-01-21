@@ -1,4 +1,4 @@
-FROM openshift3/jenkins-slave-maven-rhel7
+FROM rhel7.2
 
 MAINTAINER Ben Parees <bparees@redhat.com>
 
