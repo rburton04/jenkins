@@ -12,15 +12,15 @@ LABEL com.redhat.component="jenkins-slave-maven-rhel7-docker" \
       io.k8s.description="The jenkins slave maven image has the maven tools on top of the jenkins slave base image." \
       io.openshift.tags="openshift,jenkins,slave,maven"
 
-ENV MAVEN_VERSION=3.3.9 \
+ENV MAVEN_VERSION=3.3 \
     BASH_ENV=/usr/local/bin/scl_enable \
     ENV=/usr/local/bin/scl_enable \
     PROMPT_COMMAND=". /usr/local/bin/scl_enable"
 
 # Install Maven
-RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
-    yum-config-manager --disable epel >/dev/null || : && \
-    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 rh-maven" && \
+RUN yum-config-manager --disable epel >/dev/null || : && \
+    # yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 rh-maven33*" && \
     yum install -y $INSTALL_PKGS && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
