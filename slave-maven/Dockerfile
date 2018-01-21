@@ -20,10 +20,16 @@ ENV MAVEN_VERSION=3.3 \
 # Install Maven
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     yum-config-manager --disable epel >/dev/null || : && \
-    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686 rh-maven33*" && \
+    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686 && \
     yum install -y $INSTALL_PKGS && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
+    cd /usr/local/bin && \
+    wget http://mirror.olnevhost.net/pub/apache/maven/binaries/apache-maven-3.3.9-bin.tar.gz && \
+    tar xvf apache-maven-3.3.9-bin.tar.gz && \
+    export M2_HOME=/usr/local/bin/apache-maven/apache-maven-3.3 && \
+    export M2=$M2_HOME/bin && \
+    export PATH=$M2:$PATH && \
     mkdir -p $HOME/.m2 && \
     chmod -R 777 /usr/local/bin && \
     curl -SsL https://downloads.getgauge.io/stable | sh && \
