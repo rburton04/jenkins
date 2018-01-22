@@ -31,8 +31,8 @@ ENV MAVEN_VERSION=3.3 \
     #export M2=$M2_HOME/bin && \
     #export PATH=$M2:$PATH && \
    # mkdir -p $HOME/.m2 && \
-    chmod -R 777 /usr/local/bin && \
-    curl -SsL https://downloads.getgauge.io/stable | sh && \
+   # chmod -R 777 /usr/local/bin && \
+    curl -SsL https://downloads.getgauge.io/stable | sh -s -- --location=/usr/bin && \
     gauge install java
 
 
