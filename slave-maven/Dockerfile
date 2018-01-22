@@ -20,7 +20,7 @@ ENV MAVEN_VERSION=3.3 \
 # Install Maven
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \    
     yum-config-manager --disable epel >/dev/null || : && \
-    INSTALL_PKGS="java-1.8.0-openjdk-devel rh-maven33*" && \
+    INSTALL_PKGS="java-1.8.0-openjdk-devel" && \
     yum install -y $INSTALL_PKGS && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
@@ -28,6 +28,8 @@ RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     chmod -R 777 /usr/local/bin && \
     curl -SsL https://downloads.getgauge.io/stable | sh && \
     gauge install java
+    wget https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.3.9/apache-maven-3.3.9-bin.tar.gz
+    tar xvf apache-maven-3.3.9-bin.tar.gz
 
 # When bash is started non-interactively, to run a shell script, for example it
 # looks for this variable and source the content of this file. This will enable
