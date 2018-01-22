@@ -23,7 +23,7 @@ COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     yum-config-manager --enable rhel-7-server-optional-rpms && \
     yum-config-manager --disable epel >/dev/null || : && \
-    INSTALL_PKGS="java-1.8.0-openjdk-devel rh-maven33*" && \
+    INSTALL_PKGS="java-1.7.0-openjdk-devel rh-maven33-1-17.el7.x86_64" && \
     yum install -y $INSTALL_PKGS && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
