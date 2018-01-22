@@ -17,8 +17,11 @@ ENV MAVEN_VERSION=3.3 \
     ENV=/usr/local/bin/scl_enable \
     PROMPT_COMMAND=". /usr/local/bin/scl_enable"
 
+COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
+
 # Install Maven
-RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \    
+RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+    yum-config-manager --enable rhel-7-server-optional-rpms && \
     yum-config-manager --disable epel >/dev/null || : && \
     INSTALL_PKGS="java-1.8.0-openjdk-devel rh-maven33*" && \
     yum install -y $INSTALL_PKGS && \
