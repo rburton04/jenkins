@@ -20,12 +20,11 @@ ENV MAVEN_VERSION=3.3 \
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install Maven
+subscription-manager subscribe --8a85f9815f110553015f116312800f0b
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     
     yum-config-manager --disable epel >/dev/null || : && \
-    yum install rh-maven33
-    scl enable rh-maven33 bash
-    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i68" && \
+    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i68 rh-maven33*" && \
     yum install -y $INSTALL_PKGS && \
     rpm -V ${INSTALL_PKGS//\*/} && \
     yum clean all -y && \
