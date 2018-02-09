@@ -20,7 +20,7 @@ ENV MAVEN_VERSION=3.3 \
 COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install Maven
-subscription-manager subscribe --8a85f9815f110553015f116312800f0b
+
 RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     
     yum-config-manager --disable epel >/dev/null || : && \
