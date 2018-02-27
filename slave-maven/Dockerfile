@@ -21,7 +21,9 @@ COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install Maven
 
-RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+RUN yum-config-manager --enable rhel-7-server-rhscl-rpms && \
+    yum-config-manager --enable rhel-7-server-optional-rpms && \
+    yum-config-manager --enable rhel-7-server-extras-rpms && \
     
     yum-config-manager --disable epel >/dev/null || : && \
     INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686 rh-maven33*" && \
