@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/openshift3/jenkins-slave-maven-rhel7
+FROM registry.access.redhat.com/openshift3/jenkins-slave-base-rhel7
 
 MAINTAINER Ben Parees <bparees@redhat.com>
 
@@ -21,13 +21,13 @@ COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 
 # Install Maven
 
-#RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
+RUN yum-config-manager --enable rhel-server-rhscl-7-rpms && \
     
- #   yum-config-manager --disable epel >/dev/null || : && \
-  #  INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i68 rh-maven33*" && \
-   # yum install -y $INSTALL_PKGS && \
-    #rpm -V ${INSTALL_PKGS//\*/} && \
-    #yum clean all -y && \
+    yum-config-manager --disable epel >/dev/null || : && \
+    INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i68 rh-maven33*" && \
+    yum install -y $INSTALL_PKGS && \
+    rpm -V ${INSTALL_PKGS//\*/} && \
+    yum clean all -y && \
     mkdir -p $HOME/.m2 && \
     chmod -R 777 /usr/local/bin && \
     curl -SsL https://downloads.getgauge.io/stable | sh && \
