@@ -24,6 +24,8 @@ COPY contrib/bin/scl_enable /usr/local/bin/scl_enable
 RUN yum-config-manager --enable rhel-7-server-rhscl-rpms && \
     yum-config-manager --enable rhel-7-server-optional-rpms && \
     yum-config-manager --enable rhel-7-server-extras-rpms && \
+    yum-config-manager --enable rhel-7-server-rpms && \
+    yum-config-manager --enable rhel-7-server-ose-3.2-rpms && \
     
     yum-config-manager --disable epel >/dev/null || : && \
     INSTALL_PKGS="java-1.8.0-openjdk-devel.x86_64 java-1.8.0-openjdk-devel.i686 rh-maven33*" && \
